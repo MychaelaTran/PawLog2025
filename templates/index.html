@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Care Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-buttons {
+            margin-right: 1rem;
+        }
+
+        .header-buttons a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background-color: #3b8e42;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .header-buttons a:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .tracker-section {
+            margin-top: 2rem;
+        }
+
+        .tracker-entry {
+            padding: 0.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tracker-entry:last-child {
+            border-bottom: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #777;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Pet Care Tracker</h1>
+        <div class="header-buttons">
+            <a href="account/login">Login</a>
+            <a href="account/register">Register</a>
+            <a href="account/logout">Logout</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Track Your Pet's Daily Care</h2>
+        <form id="pet-tracker-form">
+            <div class="form-group">
+                <label for="pet-name">Pet Name</label>
+                <input type="text" id="pet-name" name="petName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="food">Food Intake (g)</label>
+                <input type="number" id="food" name="food" placeholder="Enter amount in grams">
+            </div>
+
+            <div class="form-group">
+                <label for="water">Water Intake (ml)</label>
+                <input type="number" id="water" name="water" placeholder="Enter amount in milliliters">
+            </div>
+
+            <div class="form-group">
+                <label for="pee">Pee Times</label>
+                <input type="number" id="pee" name="pee" placeholder="Enter number of pee times">
+            </div>
+
+            <div class="form-group">
+                <label for="poo">Poop Times</label>
+                <input type="number" id="poo" name="poo" placeholder="Enter number of poop times">
+            </div>
+
+            <div class="form-group">
+                <label for="medication">Medication</label>
+                <textarea id="medication" name="medication" rows="3" placeholder="Enter medication details (if any)"></textarea>
+            </div>
+
+            <button type="submit">Add Entry</button>
+        </form>
+
+        <div class="tracker-section">
+            <h2>Daily Entries</h2>
+            <div id="entries"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pet Care Tracker. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('pet-tracker-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const petName = document.getElementById('pet-name').value;
+            const food = document.getElementById('food').value || 'N/A';
+            const water = document.getElementById('water').value || 'N/A';
+            const pee = document.getElementById('pee').value || 'N/A';
+            const poo = document.getElementById('poo').value || 'N/A';
+            const medication = document.getElementById('medication').value || 'N/A';
+
+            const entryHTML = `
+                <div class="tracker-entry">
+                    <strong>Pet Name:</strong> ${petName}<br>
+                    <strong>Food Intake:</strong> ${food} g<br>
+                    <strong>Water Intake:</strong> ${water} ml<br>
+                    <strong>Pee Times:</strong> ${pee}<br>
+                    <strong>Poop Times:</strong> ${poo}<br>
+                    <strong>Medication:</strong> ${medication}<br>
+                    <hr>
+                </div>
+            `;
+
+            document.getElementById('entries').insertAdjacentHTML('beforeend', entryHTML);
+            document.getElementById('pet-tracker-form').reset();
+        });
+    </script>
+</body>
+
+</html>
